@@ -90,7 +90,7 @@ class EditProfile extends Component {
     render(){
         const {id, name, email,password, redirectToProfile} = this.state
         if(redirectToProfile){
-            <Redirect to={`/user/${id}`}/>
+           return <Redirect to={`/user/${id}`}/>
         }
         console.log('render')
         console.log(password)
