@@ -54,7 +54,7 @@ class EditProfile extends Component {
             this.setState({error: "Name is Required"})
             return false
         }
-        if(!/^\w+([.-]?\w=)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+        if(!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             this.setState({error: "Email is not valid"})
             return false
         }
