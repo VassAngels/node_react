@@ -45,27 +45,48 @@ class EditProfile extends Component {
     handleChange =(type) => event =>{
         this.setState({[type]: event.target.value})
     }
+
+    //client side validation
+    isValid=()=>{
+        const {name,email,password} = this.state
+        
+        if(name.length===0) {
+            this.setState({error: "Name is Required"})
+            return false
+        }
+        if(!/^\w+([.-]?\w=)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            this.setState({error: "Email is not valid"})
+            return false
+        }
+        if(password.length>=1 && password.length <=5) {
+            this.setState({error: "Password must be at least 5 chars long"})
+            return false
+        }
+        return true
+    }
     ///////////////////////////////////////////////
     //submit update data to the back end method////
     ///////////////////////////////////////////////
     clickUpdate=(event)=>{
         event.preventDefault(); //prevent refreshing
-        const {name,email, password}=this.state //getting the data from the state
-        const user = //creating user object to be passed to the back end
-        {   name: name,
-            email: email,
-            password:password || undefined
+        if(this.isValid()){
+            const {name,email, password}=this.state //getting the data from the state
+            const user = //creating user object to be passed to the back end
+            {   name: name,
+                email: email,
+                password:password || undefined
+            }
+            const userId = this.props.match.params.userId//grab userID from router parameter
+            const token = isAuthenticated().token; //grab token
+            update(userId, token, user)//make the request to the backend for updating the user
+            .then(responseData => {
+                if(responseData.error) this.setState({error:responseData.error})
+                    else this.setState({
+                        redirectToProfile: true
+                    }
+                    )
+            })
         }
-        const userId = this.props.match.params.userId//grab userID from router parameter
-        const token = isAuthenticated().token; //grab token
-        update(userId, token, user)//make the request to the backend for updating the user
-        .then(responseData => {
-            if(responseData.error) this.setState({error:responseData.error})
-                else this.setState({
-                    redirectToProfile: true
-                }
-                )
-        })
     }
     ///////////////////////////////////////////////
     //form to be rendered/////////////////////////
@@ -98,7 +119,7 @@ class EditProfile extends Component {
                 <h2 className="my-5 mb-5">Edit Profile</h2>
                  {/* conditional rendering */}
                 <div className="alert alert-danger" style={{ display: error ? "": "none"}}>
-                    {this.state.error}
+                    {error}
                 </div>               
                 {this.UpdateForm(name,email,password)}
 
