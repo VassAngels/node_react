@@ -7,9 +7,9 @@ const express = require('express')
 const router = express.Router();
 
 //Accessing controllers
-const {signup, signin, signout} = require ('../controllers/auth')
+const {signup, signin, signout,forgotPassword,resetPassword} = require ('../controllers/auth')
 const {userById} = require ('../controllers/user')
-const {userSignupValidator} = require ('../validator')
+const {userSignupValidator, passwordResetValidator} = require ('../validator')
 
 
 //Posting to DB from frontend
@@ -18,6 +18,9 @@ router.post('/signup',userSignupValidator,signup)
 router.post('/signin',signin)
 
 router.get('/signout',signout)
+
+router.put("/forgot-password", forgotPassword);
+router.put("/reset-password", passwordResetValidator, resetPassword)
 
 // If the 'userId' parameter is present in the url, we run "userId", 
 // which fetches the user info based on the id, and append it onto the request object
