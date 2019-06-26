@@ -9,6 +9,7 @@ import Profile from "./user/Profile";
 import Users from "./user/Users"
 import EditProfile from "./user/EditProfile";
 import PrivateRoute from './auth/PrivateRoute'
+import ForgotPassword from './user/ForgotPassword'
 
 
 const MainRouter = () => (
@@ -21,6 +22,7 @@ const MainRouter = () => (
             <Route exact path="/user/:userId" component ={Profile}></Route>
             <Route exact path="/users" component={Users}></Route>
             <PrivateRoute exact path="/user/edit/:userId" component={EditProfile}></PrivateRoute>
+            <Route exact path="/forgot-password" component={ForgotPassword}></Route>
         </Switch>
     </div>
 )

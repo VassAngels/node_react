@@ -2,7 +2,7 @@
 // post a request to the backend with the user values 
 // we have stored in the state
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import {signIn, authenticate} from '../auth'
 
 class Signin extends Component {
@@ -85,6 +85,10 @@ class Signin extends Component {
                                     <h2>Loading...</h2>
                                 </div>: ""}
                 {this.returnSigninForm( email, password)}
+                <p>
+                    <Link to="/forgot-password" className="text-danger">
+                        Forgot Password</Link>
+                </p>
             </div>
         )
     }
