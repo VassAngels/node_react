@@ -59,21 +59,6 @@ export const update=(userId,token,user)=>{
     .catch (err => console.log(err))
 }
 
-export const forgot1Password=(user)=>{
-    return fetch(`${process.env.REACT_APP_API_URL}/forgot-password`,
-    {method: "PUT",
-    headers:  {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(user)
-    })
-    .then(response => {
-        return response.json()
-    })
-    .catch (err => console.log(err))
-}
-
 export const forgotPassword = (email) => {
     return fetch(`${process.env.REACT_APP_API_URL}/forgot-password/`, //standard http client for making http requests to the backend
     {
