@@ -73,3 +73,39 @@ export const forgotPassword = (email) => {
         return response.json()
     })
     .catch(err=>console.log(err))};
+
+// export const resetPassword = (token,password) =>{
+//     return fetch(`${process.env.REACT_APP_API_URL}/reset-password`,
+//     {
+//         method: "PUT",
+//         headers: {
+//             "Accept": "application/json",
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({password}),
+//         token: JSON.stringify({token})
+//     })
+//     .then(response => {
+//         return response.json()
+//     })
+//     .catch(err=>console.log(err))}    
+
+
+ 
+export const resetPassword = resetInfo => {
+    console.log(resetInfo)
+    console.log(1)
+    return fetch(`${process.env.REACT_APP_API_URL}/reset-password/`, {
+        method: "PUT",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(resetInfo)
+    })
+        .then(response => {
+            console.log("forgot password response: ", response);
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};

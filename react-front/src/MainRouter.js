@@ -10,6 +10,7 @@ import Users from "./user/Users"
 import EditProfile from "./user/EditProfile";
 import PrivateRoute from './auth/PrivateRoute'
 import ForgotPassword from './user/ForgotPassword'
+import ResetPassword from './user/ResetPassword'
 
 
 const MainRouter = () => (
@@ -23,6 +24,8 @@ const MainRouter = () => (
             <Route exact path="/users" component={Users}></Route>
             <PrivateRoute exact path="/user/edit/:userId" component={EditProfile}></PrivateRoute>
             <Route exact path="/forgot-password" component={ForgotPassword}></Route>
+            <Route exact path="/reset-password/:token" component={ResetPassword}></Route>
+
         </Switch>
     </div>
 )
